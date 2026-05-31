@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Sistema de Estudiantes</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #eef2f7;
+    margin: 0;
+}
+
+/* HEADER */
+.header {
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* CONTENEDOR */
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+/* FORMULARIO */
+.form-box {
+    background: white;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+    width: 180px;
+}
+
+button {
+    padding: 10px 15px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #219150;
+}
+
+/* BUSCADOR */
+.search-box {
+    margin-top: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* TABLA */
+table {
+    width: 100%;
+    margin-top: 20px;
+    background: white;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+th {
+    background: #34495e;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+    <h1>📚 Sistema de Registro de Estudiantes</h1>
+</div>
+
+<div class="container">
+
+<!-- TARJETAS -->
+<div class="cards">
+    <div class="card">
+        <h3>Total Estudiantes</h3>
+        <h2>{{ estudiantes|length }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Sistema</h3>
+        <h2>Activo 🟢</h2>
+    </div>
+
+    <div class="card">
+        <h3>Base de datos</h3>
+        <h2>SQLite</h2>
+    </div>
+</div>
+
+<!-- FORMULARIO -->
+<div class="form-box">
+<h3>➕ Agregar estudiante</h3>
+
+<form action="/agregar" method="POST">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="apellido" placeholder="Apellido" required>
+    <input type="text" name="carnet" placeholder="Carnet" required>
+    <input type="text" name="carrera" placeholder="Carrera" required>
+    <input type="text" name="semestre" placeholder="Semestre" required>
+    <input type="text" name="telefono" placeholder="Teléfono" required>
+
+    <button type="submit">Guardar</button>
+</form>
+</div>
+
+<!-- BUSCADOR -->
+<div class="search-box">
+<h3>🔍 Buscar estudiante</h3>
+
+<form action="/buscar" method="GET">
+    <input type="text" name="texto" placeholder="Nombre, apellido o carnet">
+    <button type="submit">Buscar</button>
+</form>
+</div>
+
+<!-- TABLA -->
+<h3 style="margin-top:20px;">📋 Lista de estudiantes</h3>
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Carnet</th>
+    <th>Carrera</th>
+    <th>Semestre</th>
+    <th>Teléfono</th>
+</tr>
+
+{% for e in estudiantes %}
+<tr>
+    <td>{{ e[0] }}</td>
+    <td>{{ e[1] }}</td>
+    <td>{{ e[2] }}</td>
+    <td>{{ e[3] }}</td>
+    <td>{{ e[4] }}</td>
+    <td>{{ e[5] }}</td>
+    <td>{{ e[6] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
